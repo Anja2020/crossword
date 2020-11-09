@@ -237,9 +237,6 @@ class CrosswordCreator():
                     if value[yPosition] != xValue:
                         eliminating[varValue] += 1
 
-        # eliminating = [value for k, valuy in sorted(
-         #   eliminating.items(), key=lambda item: item[1])]
-
         return sorted(eliminating)
 
     def select_unassigned_variable(self, assignment):
@@ -277,12 +274,12 @@ class CrosswordCreator():
 
         var = self.select_unassigned_variable(assignment)
         for value in self.domains[var]:
+            assignment[var] = value
             if self.consistent(assignment):
-                assignment[var] = value
                 result = self.backtrack(assignment)
                 if result != None:
                     return result
-                assignment.pop(var)
+            assignment.pop(var)
         return None
 
 
